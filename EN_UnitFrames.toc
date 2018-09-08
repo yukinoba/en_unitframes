@@ -5,7 +5,7 @@
 ## Notes: Enhanced Unit Frames including HP/MP values, class, race, level tag, and more ...
 ## Notes-zhTW: 增強顯示頭像，顯示目標的目標的目標，破甲值，隊員職業等級 生命值及法力值等信息，隊友目標，隊友施法條
 ## Notes-zhCN: 增强显示头像，显示目标的目标的目标，破甲值，队友职业等级 生命值及法力值等信息，队友目标，队友施法条
-## Version: 8.0.0
+## Version: 8.0.1
 ## Author: Enigma, ported to 1.12 by Luodan, ported to 2.5 by 死性不改@CN, ported to 3.0 by 曉漁@巨龍之喉TW, ported to 4.1 by 誰機@鬼霧峰TW, ported to 8.0 by 野雷@鬼霧峰TW
 ## SavedVariables: EUF_Options
 ## X-Curse-Packaged-Version: r50

@@ -274,7 +274,8 @@ function EUF_PlayerFramePosition_Update(self, button)
             displayText = string.format("%d%%", runSpeed / BASE_MOVEMENT_SPEED * 100);
         end;
     else
-        local x, y = C_Map.GetPlayerMapPosition(C_Map.GetBestMapForUnit("player"), "player")
+        RunScript('eufpos = C_Map.GetPlayerMapPosition(C_Map.GetBestMapForUnit("player"), "player")');
+        local x, y = eufpos:GetXY();
 
         if x and y then
             x = math.floor(x * 100);

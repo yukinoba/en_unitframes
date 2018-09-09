@@ -1,5 +1,5 @@
 ﻿--[[
-Enigma Unit Frames 8.0.2 Main Script
+Enigma Unit Frames 8.0.3 Main Script
 
 Notice for developers:
 - How to release new version?
@@ -9,7 +9,7 @@ DO NOT update the 'COMPATIBLEVERSION in EUF_CurrentOptions' unless
 you revise the structure of EUF_CurrentOptions, and want users to reset to default setting again.
 ]]
 
-EUF_Version = "8.0.2"
+EUF_Version = "8.0.3"
 EUF_AddonId = "EUF";
 EUF_AddonName = "Enigma Unit Frames";
 EUF_SysAddonName = "EN_UnitFrames";
@@ -43,7 +43,7 @@ EN_MAX_PLAYER_LEVEL = {
 EUF_CurrentOptions = {};
 
 local EUF_DefaultOptions= {
-        ["VERSION"] = "8.0.2",
+        ["VERSION"] = "8.0.3",
         ["COMPATIBLEVERSION"] = "7.0.4",
         ["PLAYERHP"] = 1,
         ["PLAYERMP"] = 1,

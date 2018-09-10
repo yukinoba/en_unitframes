@@ -274,8 +274,14 @@ function EUF_PlayerFramePosition_Update(self, button)
             displayText = string.format("%d%%", runSpeed / BASE_MOVEMENT_SPEED * 100);
         end;
     else
-        RunScript('eufpos = C_Map.GetPlayerMapPosition(C_Map.GetBestMapForUnit("player"), "player")');
-        local x, y = eufpos:GetXY();
+        local x = 0;
+        local y = 0;
+        local inInstance, instanceType = IsInInstance();
+        if not inInstance then
+            RunScript('eufpos = C_Map.GetPlayerMapPosition(C_Map.GetBestMapForUnit("player"), "player")');
+            x, y = eufpos:GetXY();
+        end;
+        --local x, y = eufpos:GetXY();
 
         if x and y then
             x = math.floor(x * 100);
@@ -634,7 +640,7 @@ function EUF_PlayerFrameExtBar_Update()
         EUF_PlayerFrameXPBarBorderExt:SetWidth(107);
         EUF_PlayerFrameXPBar:SetWidth(214);
         EUF_PlayerFrameXPBarBorderExt:SetTexCoord(0.5703125, 0.8828125, 0, 1);
-        Place(EUF_PlayerFrameXP,"CENTER", "PlayerFrame", 106, -34);
+        Place(EUF_PlayerFrameXP,"CENTER", "PlayerFrame", 106, -22);
     else
         Place(EUF_PlayerFramePosition,"LEFT","PlayerFrame","TOPLEFT",229,-31);
         Place(EUF_PlayerFrameHP,"LEFT","PlayerFrame","TOPLEFT",229,-47);
@@ -647,7 +653,7 @@ function EUF_PlayerFrameExtBar_Update()
         EUF_PlayerFrameXPBarBorderExt:SetWidth(9);
         EUF_PlayerFrameXPBarBorderExt:SetTexCoord(0.84765625, 0.8828125, 0, 1);
         EUF_PlayerFrameXPBar:SetWidth(119);
-        Place(EUF_PlayerFrameXP,"CENTER", "PlayerFrame", 50, -34);
+        Place(EUF_PlayerFrameXP,"CENTER", "PlayerFrame", 50, -22);
     end;
 end
 
@@ -763,16 +769,23 @@ end
 
 function PowerFrame_Position(class,canShow)
     if canShow == 1 then
-        if ( PlayerFrame.classPowerBar ) then
-            Place(PlayerFrame.classPowerBar, "TOP", "PlayerFrame", "BOTTOM", 54, 20);
-        elseif ( class == "SHAMAN" ) then
-            Place(TotemFrame, "TOP", "PlayerFrame", "BOTTOM", 54, 20);
+        if ( class == "SHAMAN" ) then
+            Place(PlayerFrameAlternateManaBar, "TOP", "PlayerFrame", "BOTTOM", 54, 10);
+        elseif ( class == "DRUID" ) then
+            Place(PlayerFrameAlternateManaBar, "TOP", "PlayerFrame", "BOTTOM", 54, 10);
+            Place(PlayerFrame.classPowerBar, "TOP", "PlayerFrame", "BOTTOM", 54, 40);
+            Place(ComboPointPlayerFrame, "TOP", "PlayerFrame", "BOTTOM", 54, 20);
         elseif ( class == "DEATHKNIGHT" ) then
             Place(RuneFrame, "TOP", "PlayerFrame", "BOTTOM", 54, 20);
         elseif ( class == "PRIEST" ) then
             Place(PriestBarFrame, "TOP", "PlayerFrame", "BOTTOM", 54, 20);
         elseif ( class == "PALADIN" ) then
-            Place(PaladinPowerBarFrame, "TOP", "PlayerFrame", "BOTTOM", 54, 30);
+            Place(PaladinPowerBarFrame, "TOP", "PlayerFrame", "BOTTOM", 54, 25);
+        elseif ( class == "MONK" ) then
+            Place(MonkStaggerBar, "TOP", "PlayerFrame", "BOTTOM", 54, 10);
+            Place(PlayerFrame.classPowerBar, "TOP", "PlayerFrame", "BOTTOM", 54, 40);
+        elseif ( PlayerFrame.classPowerBar ) then
+            Place(PlayerFrame.classPowerBar, "TOP", "PlayerFrame", "BOTTOM", 54, 40);
         end;
         -- if ( class == "WARLOCK" ) then
             -- Place(WarlockPowerFrame, "TOP", "PlayerFrame", "BOTTOM", 54, 25);
@@ -783,18 +796,27 @@ function PowerFrame_Position(class,canShow)
         -- elseif ( class == "DEATHKNIGHT" ) then
             -- Place(RuneFrame, "TOP", "PlayerFrame", "BOTTOM", 54, 20);
         -- end;
-        Place(PetFrame,"TOP", "PlayerFrame","BOTTOM", 20, 10);
+        if PetFrame and PetFrame:IsShown() then
+            Place(PetFrame, "TOP", "PlayerFrame", "BOTTOM", 20, 10);
+        end;
     else
-        if ( PlayerFrame.classPowerBar ) then
-            Place(PlayerFrame.classPowerBar, "TOP", "PlayerFrame", "BOTTOM", 54, 30);
-        elseif ( class == "SHAMAN" ) then
-            Place(TotemFrame, "TOP", "PlayerFrame", "BOTTOM", 54, 30);
+        if ( class == "SHAMAN" ) then
+            Place(PlayerFrameAlternateManaBar, "TOP", "PlayerFrame", "BOTTOM", 54, 35);
+        elseif ( class == "DRUID" ) then
+            Place(PlayerFrameAlternateManaBar, "TOP", "PlayerFrame", "BOTTOM", 54, 35);
+            Place(PlayerFrame.classPowerBar, "TOP", "PlayerFrame", "BOTTOM", 54, 50);
+            Place(ComboPointPlayerFrame, "TOP", "PlayerFrame", "BOTTOM", 54, 35);
         elseif ( class == "DEATHKNIGHT" ) then
-            Place(RuneFrame, "TOP", "PlayerFrame", "BOTTOM", 54, 30);
+            Place(RuneFrame, "TOP", "PlayerFrame", "BOTTOM", 54, 35);
         elseif ( class == "PRIEST" ) then
             Place(PriestBarFrame, "TOP", "PlayerFrame", "BOTTOM", 54, 30);
         elseif ( class == "PALADIN" ) then
             Place(PaladinPowerBarFrame, "TOP", "PlayerFrame", "BOTTOM", 54, 40);
+        elseif ( class == "MONK" ) then
+            Place(MonkStaggerBar, "TOP", "PlayerFrame", "BOTTOM", 54, 35);
+            Place(PlayerFrame.classPowerBar, "TOP", "PlayerFrame", "BOTTOM", 54, 55);
+        elseif ( PlayerFrame.classPowerBar ) then
+            Place(PlayerFrame.classPowerBar, "TOP", "PlayerFrame", "BOTTOM", 54, 50);
         end;
         -- if ( class == "WARLOCK" ) then
             -- Place(WarlockPowerFrame, "TOP", "PlayerFrame", "BOTTOM", 54, 35);
@@ -805,7 +827,9 @@ function PowerFrame_Position(class,canShow)
         -- elseif ( class == "DEATHKNIGHT" ) then
             -- Place(RuneFrame, "TOP", "PlayerFrame", "BOTTOM", 54, 30);
         -- end;
-        Place(PetFrame,"TOP", "PlayerFrame","BOTTOM", 20, 20);
+        if PetFrame and PetFrame:IsShown() then
+            Place(PetFrame, "TOP", "PlayerFrame", "BOTTOM", 20, 20);
+        end;
     end;
 end
 

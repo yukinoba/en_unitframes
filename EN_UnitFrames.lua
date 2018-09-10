@@ -127,6 +127,9 @@ function EUF_OnLoad(this)
     this:RegisterEvent("PLAYER_ENTERING_WORLD");
     this:RegisterEvent("ADDON_LOADED");
     this:RegisterEvent("VARIABLES_LOADED");
+    this:RegisterEvent("UPDATE_SHAPESHIFT_FORM");
+    this:RegisterEvent("PLAYER_SPECIALIZATION_CHANGED");
+    this:RegisterEvent("ADDON_LOADED");
 
     -- Slash Command Handler
     SLASH_EUF1 = "/euf";
@@ -168,6 +171,9 @@ function EUF_OnEvent(self, event, ...)
         EUF_HidePartyToggle();
         PartyTarget_Toggle();
         PartyBuff_Toggle();
+    elseif event == "PLAYER_SPECIALIZATION_CHANGED" or event == "UPDATE_SHAPESHIFT_FORM" then
+        EUF_ObjectDisplay_Update(EUF_PlayerFrameXP, EUF_CanXPBarShow());
+        EUF_ObjectDisplay_Update(EUF_PlayerFrameXPBar, EUF_CanXPBarShow());
     elseif event == "VARIABLES_LOADED" then
         --EN_Msg("EUF_OnEvent: "..event);
         -- hooksecurefunc
@@ -593,5 +599,7 @@ end
 
 function Place( obj, arg1, arg2, arg3, arg4, arg5 )
     --obj:ClearAllPoints();
-    obj:SetPoint( arg1, arg2, arg3, arg4, arg5 );
+    if obj then
+        obj:SetPoint( arg1, arg2, arg3, arg4, arg5 );
+    end;
 end

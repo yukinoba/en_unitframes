@@ -17,7 +17,7 @@ function PartyBuff_Toggle()
 
         -- buff
         for j = 1, 16 do
-            buff = CreateFrame("Button", str.."Buff"..j, getglobal(str), "TargetBuffFrameTemplate");
+            buff = CreateFrame("Button", str.."Buff"..j, getglobal(str), "PartyBuffFrameTemplate");
             buff:SetID(j);
             buff:SetWidth(15);
             buff:SetHeight(15);
@@ -48,7 +48,7 @@ function PartyBuff_Toggle()
         Place(debuffbutton1, "TOPLEFT", str, "RIGHT", 20+EUF_CurrentOptions["PARTYDEBUFFPOSITIONX"], 33+EUF_CurrentOptions["PARTYDEBUFFPOSITIONY"]);
 
         for j = 5, 10 do
-            buff = CreateFrame("Button", str.."Debuff"..j, getglobal(str), "PartyBuffFrameTemplate");
+            buff = CreateFrame("Button", str.."Debuff"..j, getglobal(str), "PartyDebuffFrameTemplate");
             Place(buff, "LEFT", str.."Debuff"..j-1, "RIGHT", 2, 0);
         end;
     end;
@@ -99,7 +99,7 @@ end
 
 -- Pet Buffs/Debuffs --
 for i = 1, 10 do
-    buff = CreateFrame("Button", "PetFrameBuff"..i, PetFrame, "TargetBuffFrameTemplate");
+    buff = CreateFrame("Button", "PetFrameBuff"..i, PetFrame, "PartyBuffFrameTemplate");
     buff:SetID(i);
     buff:SetWidth(15);
     buff:SetHeight(15);
@@ -123,7 +123,7 @@ for i = 1, 10 do
         Place(buff, "LEFT", "PetFrameBuff"..i-1, "RIGHT", 2, 0);
     end;
 
-    buff = CreateFrame("Button", "PetFrameDebuff"..i, PetFrame, "PartyPetDeBuffFrameTemplate");
+    buff = CreateFrame("Button", "PetFrameDebuff"..i, PetFrame, "PartyPetDebuffFrameTemplate");
 end;
 
 function PartyMemberBuffTooltip_Update(isPet)

@@ -37,7 +37,7 @@
 
     <PlayerModel frameStrata="BACKGROUND" name="EUF_3DPortrait_PlayerModel" hidden="true" parent="PlayerFrame">
         <Size>
-            <AbsDimension x="49" y="55"/>
+            <AbsDimension x="49" y="50"/>
         </Size>
         <Anchors>
             <Anchor point="CENTER" relativePoint="CENTER" relativeTo="PlayerPortrait">
@@ -73,7 +73,7 @@
 
     <PlayerModel frameStrata="BACKGROUND" name="EUF_3DPortrait_TargetModel" hidden="true" parent="TargetFrame">
         <Size>
-            <AbsDimension x="49" y="55"/>
+            <AbsDimension x="49" y="50"/>
         </Size>
         <Anchors>
             <Anchor point="CENTER" relativePoint="CENTER" relativeTo="TargetFramePortrait">
@@ -90,7 +90,7 @@
     </PlayerModel>
     <PlayerModel frameStrata="BACKGROUND" name="EUF_3DPortrait_FocusModel" hidden="true" parent="TgFocusFrame">
     <Size>
-        <AbsDimension x="49" y="55"/>
+        <AbsDimension x="49" y="50"/>
     </Size>
     <Anchors>
         <Anchor point="CENTER" relativePoint="CENTER" relativeTo="TgFocusPortrait">

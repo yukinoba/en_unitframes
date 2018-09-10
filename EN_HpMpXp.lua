@@ -763,26 +763,48 @@ end
 
 function PowerFrame_Position(class,canShow)
     if canShow == 1 then
-        if ( class == "WARLOCK" ) then
-            Place(WarlockPowerFrame, "TOP", "PlayerFrame", "BOTTOM", 54, 25);
-        elseif ( class == "DRUID" ) then
-            Place(EclipseBarFrame, "TOP", "PlayerFrame", "BOTTOM", 54, 20);
-        elseif ( class == "PALADIN" ) then
-            Place(PaladinPowerBarFrame, "TOP", "PlayerFrame", "BOTTOM", 54, 30);
+        if ( PlayerFrame.classPowerBar ) then
+            Place(PlayerFrame.classPowerBar, "TOP", "PlayerFrame", "BOTTOM", 54, 20);
+        elseif ( class == "SHAMAN" ) then
+            Place(TotemFrame, "TOP", "PlayerFrame", "BOTTOM", 54, 20);
         elseif ( class == "DEATHKNIGHT" ) then
             Place(RuneFrame, "TOP", "PlayerFrame", "BOTTOM", 54, 20);
+        elseif ( class == "PRIEST" ) then
+            Place(PriestBarFrame, "TOP", "PlayerFrame", "BOTTOM", 54, 20);
+        elseif ( class == "PALADIN" ) then
+            Place(PaladinPowerBarFrame, "TOP", "PlayerFrame", "BOTTOM", 54, 30);
         end;
+        -- if ( class == "WARLOCK" ) then
+            -- Place(WarlockPowerFrame, "TOP", "PlayerFrame", "BOTTOM", 54, 25);
+        -- elseif ( class == "DRUID" ) then
+            -- Place(EclipseBarFrame, "TOP", "PlayerFrame", "BOTTOM", 54, 20);
+        -- elseif ( class == "PALADIN" ) then
+            -- Place(PaladinPowerBarFrame, "TOP", "PlayerFrame", "BOTTOM", 54, 30);
+        -- elseif ( class == "DEATHKNIGHT" ) then
+            -- Place(RuneFrame, "TOP", "PlayerFrame", "BOTTOM", 54, 20);
+        -- end;
         Place(PetFrame,"TOP", "PlayerFrame","BOTTOM", 20, 10);
     else
-        if ( class == "WARLOCK" ) then
-            Place(WarlockPowerFrame, "TOP", "PlayerFrame", "BOTTOM", 54, 35);
-        elseif ( class == "DRUID" ) then
-            Place(EclipseBarFrame, "TOP", "PlayerFrame", "BOTTOM", 54, 30);
-        elseif ( class == "PALADIN" ) then
-            Place(PaladinPowerBarFrame, "TOP", "PlayerFrame", "BOTTOM", 54, 40);
+        if ( PlayerFrame.classPowerBar ) then
+            Place(PlayerFrame.classPowerBar, "TOP", "PlayerFrame", "BOTTOM", 54, 30);
+        elseif ( class == "SHAMAN" ) then
+            Place(TotemFrame, "TOP", "PlayerFrame", "BOTTOM", 54, 30);
         elseif ( class == "DEATHKNIGHT" ) then
             Place(RuneFrame, "TOP", "PlayerFrame", "BOTTOM", 54, 30);
+        elseif ( class == "PRIEST" ) then
+            Place(PriestBarFrame, "TOP", "PlayerFrame", "BOTTOM", 54, 30);
+        elseif ( class == "PALADIN" ) then
+            Place(PaladinPowerBarFrame, "TOP", "PlayerFrame", "BOTTOM", 54, 40);
         end;
+        -- if ( class == "WARLOCK" ) then
+            -- Place(WarlockPowerFrame, "TOP", "PlayerFrame", "BOTTOM", 54, 35);
+        -- elseif ( class == "DRUID" ) then
+            -- Place(EclipseBarFrame, "TOP", "PlayerFrame", "BOTTOM", 54, 30);
+        -- elseif ( class == "PALADIN" ) then
+            -- Place(PaladinPowerBarFrame, "TOP", "PlayerFrame", "BOTTOM", 54, 40);
+        -- elseif ( class == "DEATHKNIGHT" ) then
+            -- Place(RuneFrame, "TOP", "PlayerFrame", "BOTTOM", 54, 30);
+        -- end;
         Place(PetFrame,"TOP", "PlayerFrame","BOTTOM", 20, 20);
     end;
 end

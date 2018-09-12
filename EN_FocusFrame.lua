@@ -383,14 +383,16 @@ end
 
 function FocusDebuffButton_Update(self)
     local button;
-    local name, rank, icon, count, debuffType, duration, expirationTime;
+    --local name, rank, icon, count, debuffType, duration, expirationTime;
+    local name, icon, count, debuffType, duration, expirationTime;
     local buffCount;
     local numBuffs = 0;
     local playerIsFocus = UnitIsUnit("player", "focus");
     local cooldown;
 
     for i = 1, l.MAX_FOCUS_BUFFS do
-        name, rank, icon, count, debuffType, duration, expirationTime = UnitBuff("focus", i);
+        --name, rank, icon, count, debuffType, duration, expirationTime = UnitBuff("focus", i);
+        name, icon, count, debuffType, duration, expirationTime = UnitBuff("focus", i);
         button = getglobal("TgFocusFrameBuff"..i);
 
         if ( not button ) then
@@ -448,7 +450,8 @@ function FocusDebuffButton_Update(self)
     local numDebuffs = 0;
     for i = 1, l.MAX_FOCUS_DEBUFFS do
         local debuffBorder = getglobal("TgFocusFrameDebuff"..i.."Border");
-        name, rank, icon, count, debuffType, duration, expirationTime = UnitDebuff("focus", i);
+        --name, rank, icon, count, debuffType, duration, expirationTime = UnitDebuff("focus", i);
+        name, icon, count, debuffType, duration, expirationTime = UnitDebuff("focus", i);
         button = getglobal("TgFocusFrameDebuff"..i);
 
         if ( not button ) then

@@ -75,17 +75,20 @@ end
 
 function EUF_FramePartyInfo_Update()
     local i;
-
-    for i = 1, GetNumSubgroupMembers(), 1 do
-        EUF_PartyInfo_Update("party"..i);
+    
+    for i = 1, MAX_PARTY_MEMBERS, 1 do
+        if ( UnitExists("party"..i) ) then
+            EUF_PartyInfo_Update("party"..i);
+        end;
     end;
+    -- for i = 1, GetNumSubgroupMembers(), 1 do
+        -- EUF_PartyInfo_Update("party"..i);
+    -- end;
 end
 
 function EUF_PartyMember_CheckClass()
-    local n = GetNumSubgroupMembers();
-
-    if n > 0 then
-        for i = 1, n do
+    for i = 1, MAX_PARTY_MEMBERS, 1 do
+        if ( UnitExists("party"..i) ) then
             local classLoc, class, classId = UnitClass("party"..i);
 
             if EUF_CurrentOptions["PARTYCOLOR"] == 1 and class then
@@ -95,6 +98,20 @@ function EUF_PartyMember_CheckClass()
             end;
         end;
     end;
+
+    -- local n = GetNumSubgroupMembers();
+
+    -- if n > 0 then
+        -- for i = 1, n do
+            -- local classLoc, class, classId = UnitClass("party"..i);
+
+            -- if EUF_CurrentOptions["PARTYCOLOR"] == 1 and class then
+                -- getglobal("PartyMemberFrame"..i.."Name"):SetTextColor(RAID_CLASS_COLORS[class].r,RAID_CLASS_COLORS[class].g,RAID_CLASS_COLORS[class].b);
+            -- else
+                -- getglobal("PartyMemberFrame"..i.."Name"):SetTextColor(1, 0.8, 0);
+            -- end;
+        -- end;
+    -- end;
 end
 
 function EUF_HidePartyToggle()
@@ -108,10 +125,14 @@ function EUF_HidePartyToggle()
             local lock = false;
 
             for i = 1, 4, 1 do
+                --EN_Msg("party"..i.." isInParty? "..tostring(UnitInParty("party"..i)));
+                --EN_Msg("party"..i.." affectCombat? "..tostring(UnitAffectingCombat("party"..i)));
                 if UnitInParty("party"..i) and UnitAffectingCombat("party"..i) then
                     lock = true;
                 end;
             end;
+            
+            --EN_Msg("PartyFrame lock? "..tostring(lock));
 
             if tonumber(GetCVar("useCompactPartyFrames")) == 0 and not lock then
                 SetCVar("useCompactPartyFrames", "1");

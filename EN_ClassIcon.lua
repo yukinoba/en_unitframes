@@ -169,26 +169,42 @@ function EUF_ClassIcon_Update(unit, iconType, value)
     end;
 -- Update party portraits
     if EUF_CurrentOptions["PARTYCLASSICONBIG"] == 0 then
-        for i = 1, GetNumSubgroupMembers() do
-            getglobal("PartyMemberFrame" .. i .. "Portrait"):SetTexCoord(0, 1, 0, 1);
-            SetPortraitTexture(getglobal("PartyMemberFrame" .. i .. "Portrait"), "party" .. i);
+        for i = 1, MAX_PARTY_MEMBERS, 1 do
+            if ( UnitExists("party"..i) ) then
+                getglobal("PartyMemberFrame" .. i .. "Portrait"):SetTexCoord(0, 1, 0, 1);
+                SetPortraitTexture(getglobal("PartyMemberFrame" .. i .. "Portrait"), "party" .. i);
+            end;
         end;
+        -- for i = 1, GetNumSubgroupMembers() do
+            -- getglobal("PartyMemberFrame" .. i .. "Portrait"):SetTexCoord(0, 1, 0, 1);
+            -- SetPortraitTexture(getglobal("PartyMemberFrame" .. i .. "Portrait"), "party" .. i);
+        -- end;
     else
         party_set = 1;
     end;
 
     if EUF_CurrentOptions["PARTYCLASSICONSMALL"] == 0 then
-        for i = 1, GetNumSubgroupMembers() do
-            getglobal("EUF_PartyFrame" .. i .. "Portrait"):Hide();
+        for i = 1, MAX_PARTY_MEMBERS, 1 do
+            if ( UnitExists("party"..i) ) then
+                getglobal("EUF_PartyFrame" .. i .. "Portrait"):Hide();
+            end;
         end;
+        -- for i = 1, GetNumSubgroupMembers() do
+            -- getglobal("EUF_PartyFrame" .. i .. "Portrait"):Hide();
+        -- end;
     else
         party_set = 1;
     end;
 
     if party_set ~= 0 then
-        for i = 1, GetNumSubgroupMembers() do
-            EUF_SetClass(getglobal("PartyMemberFrame" .. i .. "Portrait"), "party" .. i);
+        for i = 1, MAX_PARTY_MEMBERS, 1 do
+            if ( UnitExists("party"..i) ) then
+                EUF_SetClass(getglobal("PartyMemberFrame" .. i .. "Portrait"), "party" .. i);
+            end;
         end;
+        -- for i = 1, GetNumSubgroupMembers() do
+            -- EUF_SetClass(getglobal("PartyMemberFrame" .. i .. "Portrait"), "party" .. i);
+        -- end;
     end;
 end
 

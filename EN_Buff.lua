@@ -12,7 +12,7 @@ local name, rank, icon, count, debuffType, duration, expirationTime;
 
 function PartyBuff_Toggle()
     -- Party Buffs/Debuffs --
-    for i = 1, 4 do
+    for i = 1, MAX_PARTY_MEMBERS, 1 do
         local str = "PartyMemberFrame"..i;
 
         -- buff
@@ -27,7 +27,8 @@ function PartyBuff_Toggle()
             end);
         
             buff:SetScript("OnUpdate",function()
-                _, _, icon = UnitBuff("party"..i, j);
+                --_, _, icon = UnitBuff("party"..i, j);
+                _, icon = UnitBuff("party"..i, j);
                 getglobal(str.."Buff"..j.."Icon"):SetTexture(icon);
             end);
 
@@ -57,24 +58,22 @@ function PartyBuff_Toggle()
 end
 
 function PartyBuffPositionUpdate()
-    for i = 1, 4 do
+    for i = 1, MAX_PARTY_MEMBERS, 1 do
         Place(_G["PartyMemberFrame"..i.."Buff1"], "TOPLEFT", "PartyMemberFrame"..i, "TOPLEFT", 47+EUF_CurrentOptions["PARTYBUFFPOSITIONX"], -32+EUF_CurrentOptions["PARTYBUFFPOSITIONY"]);
     end;
 end
 
 function PartyDebuffPositionUpdate()
-    for i = 1, 4 do
+    for i = 1, MAX_PARTY_MEMBERS, 1 do
         Place(_G["PartyMemberFrame"..i.."Debuff1"], "TOPLEFT", "PartyMemberFrame"..i, "RIGHT", 20+EUF_CurrentOptions["PARTYDEBUFFPOSITIONX"], 33+EUF_CurrentOptions["PARTYDEBUFFPOSITIONY"]);
     end;
 end
 
 function PartyBuff_UpdateAll()
-    local i, P_Num;
-    P_Num = GetNumSubgroupMembers();
-    for i = 1, P_Num do
+    for i = 1, MAX_PARTY_MEMBERS, 1 do
         if UnitAffectingCombat("player") then
             _G["PartyMemberFrame"..i]:RegisterEvent("PLAYER_REGEN_ENABLED")
-        else
+        elseif ( UnitExists("party"..i) ) then
             _G["PartyMemberFrame"..i]:UnregisterEvent("PLAYER_REGEN_ENABLED");
             local str = "PartyMemberFrame"..i;
             -- buff
@@ -85,7 +84,7 @@ function PartyBuff_UpdateAll()
                     _G[str.."Buff"..j]:Hide();
                 end;
             end;
-        -- debuff
+            -- debuff
             for j = 5, 10 do
                 if EUF_CurrentOptions["PARTYBUFF"] == 1 then
                     _G[str.."Debuff"..j]:Show();
@@ -95,6 +94,32 @@ function PartyBuff_UpdateAll()
             end;
         end;
     end;
+    -- local i, P_Num;
+    -- P_Num = GetNumSubgroupMembers();
+    -- for i = 1, P_Num do
+        -- if UnitAffectingCombat("player") then
+            -- _G["PartyMemberFrame"..i]:RegisterEvent("PLAYER_REGEN_ENABLED")
+        -- else
+            -- _G["PartyMemberFrame"..i]:UnregisterEvent("PLAYER_REGEN_ENABLED");
+            -- local str = "PartyMemberFrame"..i;
+            --buff
+            -- for j = 1, 16 do
+                -- if EUF_CurrentOptions["PARTYBUFF"] == 1 then
+                    -- _G[str.."Buff"..j]:Show();
+                -- else
+                    -- _G[str.."Buff"..j]:Hide();
+                -- end;
+            -- end;
+            --debuff
+            -- for j = 5, 10 do
+                -- if EUF_CurrentOptions["PARTYBUFF"] == 1 then
+                    -- _G[str.."Debuff"..j]:Show();
+                -- else
+                    -- _G[str.."Debuff"..j]:Hide();
+                -- end;
+            -- end;
+        -- end;
+    -- end;
 end
 
 -- Pet Buffs/Debuffs --
@@ -109,7 +134,8 @@ for i = 1, 10 do
     end);
 
     buff:SetScript("OnUpdate",function()
-        _, _, icon = UnitBuff("pet", i);
+        --_, _, icon = UnitBuff("pet", i);
+        _, icon = UnitBuff("pet", i);
         getglobal("PetFrameBuff"..i.."Icon"):SetTexture(icon);
     end);
 

@@ -178,13 +178,14 @@ end
 
 function EUF_GetTargetShield(self, button)
     if EUF_CurrentOptions["TARGETINFOBROKENSHIELD"] == 1 then
-        local _, i, debuffTexture, debuffTimes;
+        local _, i, icon, count;
 
         for i = 1, 16 do
-            _, _, debuffTexture, debuffTimes = UnitDebuff("target", i);
+            --_, _, debuffTexture, debuffTimes = UnitDebuff("target", i);
+            _, icon, count = UnitDebuff("target", i);
 
-            if debuffTexture and debuffTimes and debuffTexture == "Interface\\Icons\\Ability_Warrior_Sunder" then
-                return debuffTimes * 450;
+            if icon and count and icon == GetFileIDFromPath("Interface\\Icons\\Ability_Warrior_Sunder") then
+                return count * 450;
             end;
         end;
 

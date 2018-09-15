@@ -123,7 +123,6 @@ function EUF_HidePartyToggle()
         if EUF_CurrentOptions["PARTYSHOW"] == 0 then
             local i;
             local lock = false;
-
             for i = 1, MAX_PARTY_MEMBERS, 1 do
                 if ( UnitExists("party"..i) ) then
                     --EN_Msg("party"..i.." isInParty? "..tostring(UnitInParty("party"..i)));

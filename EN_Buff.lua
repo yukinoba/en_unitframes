@@ -6,21 +6,6 @@ Changelog:
 2010.10.26 Upgrade to 4.0.1 by 誰機@鬼霧峰TW
 2012.08.31  Upgrade to 5.0.0 by 野雷@鬼霧峰TW
 ]]
-
--- function EN_Buff_OnLoad(self)
-    -- self:RegisterEvent("UNIT_AURA");
--- end
-
--- function EN_Buff_OnEvent(self, event, ...)
-    -- local arg1, arg2, arg3 = ...;
-    
-    -- if event == "UNIT_AURA" then
-        -- if tostring(arg1).find("^party") then
-            -- PartyBuff_UpdateAll();
-        -- end;
-    -- end;
--- end
-
 function PartyBuff_Toggle()
     -- Party Buffs/Debuffs --
     for i = 1, MAX_PARTY_MEMBERS, 1 do
@@ -161,6 +146,32 @@ function PartyBuff_UpdateAll()
             end;
         end;
     end;
+    -- local i, P_Num;
+    -- P_Num = GetNumSubgroupMembers();
+    -- for i = 1, P_Num do
+        -- if UnitAffectingCombat("player") then
+            -- _G["PartyMemberFrame"..i]:RegisterEvent("PLAYER_REGEN_ENABLED")
+        -- else
+            -- _G["PartyMemberFrame"..i]:UnregisterEvent("PLAYER_REGEN_ENABLED");
+            -- local str = "PartyMemberFrame"..i;
+            --buff
+            -- for j = 1, 16 do
+                -- if EUF_CurrentOptions["PARTYBUFF"] == 1 then
+                    -- _G[str.."Buff"..j]:Show();
+                -- else
+                    -- _G[str.."Buff"..j]:Hide();
+                -- end;
+            -- end;
+            --debuff
+            -- for j = 5, 10 do
+                -- if EUF_CurrentOptions["PARTYBUFF"] == 1 then
+                    -- _G[str.."Debuff"..j]:Show();
+                -- else
+                    -- _G[str.."Debuff"..j]:Hide();
+                -- end;
+            -- end;
+        -- end;
+    -- end;
 end
 
 -- Pet Buffs/Debuffs --

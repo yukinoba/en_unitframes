@@ -3,7 +3,7 @@ function PartyTarget_OnUpdate(self, elapsed)
 
     if self.timer >= 0.2 then
         local i = self:GetID();
-        local unit = "party" .. i .."target";
+        local unit = "party"..i.."target";
         local uframe = "PartyTarget"..i;
 
         if UnitExists(unit) and EUF_CurrentOptions["PARTYTARGET"]==1 then
@@ -45,7 +45,7 @@ end
 
 function PartyTarget_Toggle()
     local frame;
-    for i = 1, 4 do
+    for i = 1, MAX_PARTY_MEMBERS, 1 do
         frame = CreateFrame("Button", "PartyTarget"..i, _G["PartyMemberFrame"..i], "PartyTargetFrameTemplate");
         frame = _G["PartyTarget"..i];
 
@@ -61,14 +61,16 @@ function PartyTarget_Toggle()
 end
 
 function PartyTargetPositionUpdate()
-    for i = 1, 4 do
-        Place(_G["PartyTarget"..i], "TOPLEFT", "PartyMemberFrame"..i, "TOPLEFT", 200+EUF_CurrentOptions["PARTYTARGETPOSITIONX"], -6+EUF_CurrentOptions["PARTYTARGETPOSITIONY"]);
+    for i = 1, MAX_PARTY_MEMBERS, 1 do
+        if ( UnitExists("party"..i.."target") ) then
+            Place(_G["PartyTarget"..i], "TOPLEFT", "PartyMemberFrame"..i, "TOPLEFT", 200+EUF_CurrentOptions["PARTYTARGETPOSITIONX"], -6+EUF_CurrentOptions["PARTYTARGETPOSITIONY"]);
+        end;
     end;
 end
 
 function PartyTarget_UpdateAll()
-    for i = 1, 4 do
-        local unit = "party" .. i .."target";
+    for i = 1, MAX_PARTY_MEMBERS, 1 do
+        local unit = "party"..i.."target";
         local uframe = "PartyTarget"..i;
 
         if UnitExists(unit) and EUF_CurrentOptions["PARTYTARGET"] == 1 then

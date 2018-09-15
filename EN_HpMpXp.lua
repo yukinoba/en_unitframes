@@ -336,12 +336,16 @@ function EUF_TargetFrameHPMP_Update()
 end
 
 function EUF_PartyFrameHPMP_Update()
-    local i;
-
-    for i = 1, GetNumSubgroupMembers() do
-        EUF_HP_Update("party"..i);
-        EUF_MP_Update("party"..i);
+    for i = 1, MAX_PARTY_MEMBERS, 1 do
+        if ( UnitExists("party"..i) ) then
+            EUF_HP_Update("party"..i);
+            EUF_MP_Update("party"..i);
+        end;
     end;
+    -- for i = 1, GetNumSubgroupMembers() do
+        -- EUF_HP_Update("party"..i);
+        -- EUF_MP_Update("party"..i);
+    -- end;
 end
 
 -- HP/MP/XP
@@ -707,25 +711,23 @@ end
 function EUF_PartyFrameDisplay_Update()
     local i;
 
-    for i = 1, GetNumSubgroupMembers() do
-        if EUF_CurrentOptions["PARTYHP"] == 0 then
-            EUF_ObjectDisplay_Update(getglobal("EUF_PartyFrame"..i.."HP"), 0);
-            EUF_ObjectDisplay_Update(getglobal("EUF_PartyFrame"..i.."HPPercent"), 0);
-        else
-            if EUF_CurrentOptions["PARTYHPPERCENT"] == 0 then
+    for i = 1, MAX_PARTY_MEMBERS, 1 do
+        if ( UnitExists("party"..i) ) then
+            if EUF_CurrentOptions["PARTYHP"] == 0 then
+                EUF_ObjectDisplay_Update(getglobal("EUF_PartyFrame"..i.."HP"), 0);
+                EUF_ObjectDisplay_Update(getglobal("EUF_PartyFrame"..i.."HPPercent"), 0);
+            elseif EUF_CurrentOptions["PARTYHPPERCENT"] == 0 then
                 EUF_ObjectDisplay_Update(getglobal("EUF_PartyFrame"..i.."HP"), 1);
                 EUF_ObjectDisplay_Update(getglobal("EUF_PartyFrame"..i.."HPPercent"), 0);
             else
                 EUF_ObjectDisplay_Update(getglobal("EUF_PartyFrame"..i.."HP"), 0);
                 EUF_ObjectDisplay_Update(getglobal("EUF_PartyFrame"..i.."HPPercent"), 1);
             end;
-        end;
 
-        if EUF_CurrentOptions["PARTYMP"] == 0 then
-            EUF_ObjectDisplay_Update(getglobal("EUF_PartyFrame"..i.."MP"), 0);
-            EUF_ObjectDisplay_Update(getglobal("EUF_PartyFrame"..i.."MPPercent"), 0);
-        else
-            if EUF_CurrentOptions["PARTYMPPERCENT"] == 0 then
+            if EUF_CurrentOptions["PARTYMP"] == 0 then
+                EUF_ObjectDisplay_Update(getglobal("EUF_PartyFrame"..i.."MP"), 0);
+                EUF_ObjectDisplay_Update(getglobal("EUF_PartyFrame"..i.."MPPercent"), 0);
+            elseif EUF_CurrentOptions["PARTYMPPERCENT"] == 0 then
                 EUF_ObjectDisplay_Update(getglobal("EUF_PartyFrame"..i.."MP"), 1);
                 EUF_ObjectDisplay_Update(getglobal("EUF_PartyFrame"..i.."MPPercent"), 0);
             else
@@ -734,6 +736,33 @@ function EUF_PartyFrameDisplay_Update()
             end;
         end;
     end;
+    -- for i = 1, GetNumSubgroupMembers() do
+        -- if EUF_CurrentOptions["PARTYHP"] == 0 then
+            -- EUF_ObjectDisplay_Update(getglobal("EUF_PartyFrame"..i.."HP"), 0);
+            -- EUF_ObjectDisplay_Update(getglobal("EUF_PartyFrame"..i.."HPPercent"), 0);
+        -- else
+            -- if EUF_CurrentOptions["PARTYHPPERCENT"] == 0 then
+                -- EUF_ObjectDisplay_Update(getglobal("EUF_PartyFrame"..i.."HP"), 1);
+                -- EUF_ObjectDisplay_Update(getglobal("EUF_PartyFrame"..i.."HPPercent"), 0);
+            -- else
+                -- EUF_ObjectDisplay_Update(getglobal("EUF_PartyFrame"..i.."HP"), 0);
+                -- EUF_ObjectDisplay_Update(getglobal("EUF_PartyFrame"..i.."HPPercent"), 1);
+            -- end;
+        -- end;
+
+        -- if EUF_CurrentOptions["PARTYMP"] == 0 then
+            -- EUF_ObjectDisplay_Update(getglobal("EUF_PartyFrame"..i.."MP"), 0);
+            -- EUF_ObjectDisplay_Update(getglobal("EUF_PartyFrame"..i.."MPPercent"), 0);
+        -- else
+            -- if EUF_CurrentOptions["PARTYMPPERCENT"] == 0 then
+                -- EUF_ObjectDisplay_Update(getglobal("EUF_PartyFrame"..i.."MP"), 1);
+                -- EUF_ObjectDisplay_Update(getglobal("EUF_PartyFrame"..i.."MPPercent"), 0);
+            -- else
+                -- EUF_ObjectDisplay_Update(getglobal("EUF_PartyFrame"..i.."MP"), 0);
+                -- EUF_ObjectDisplay_Update(getglobal("EUF_PartyFrame"..i.."MPPercent"), 1);
+            -- end;
+        -- end;
+    -- end;
 end
 
 function EUF_TargetFrameDisplay_Update()

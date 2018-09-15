@@ -63,11 +63,13 @@ function Party_Spellbar_OnShow(self, button)
 end
 
 function PartyCastPositionUpdate()
-    for i = 1, 4 do
-        if (UnitIsConnected(_G["PartyFrame"..i.."SpellBar"].unit) and UnitExists("partypet"..i) and SHOW_PARTY_PETS == "1") then
-            Place(_G["PartyFrame"..i.."SpellBar"], "BOTTOM", "PartyMemberFrame"..i, "BOTTOM", 8+EUF_CurrentOptions["PARTYCASTPOSITIONX"], -34+EUF_CurrentOptions["PARTYCASTPOSITIONY"]);
-        else
-            Place(_G["PartyFrame"..i.."SpellBar"], "BOTTOM", "PartyMemberFrame"..i, "BOTTOM", 8+EUF_CurrentOptions["PARTYCASTPOSITIONX"], -8+EUF_CurrentOptions["PARTYCASTPOSITIONY"]);
+    for i = 1, MAX_PARTY_MEMBERS, 1 do
+        if ( UnitExists("party"..i) ) then
+            if (UnitIsConnected(_G["PartyFrame"..i.."SpellBar"].unit) and UnitExists("partypet"..i) and SHOW_PARTY_PETS == "1") then
+                Place(_G["PartyFrame"..i.."SpellBar"], "BOTTOM", "PartyMemberFrame"..i, "BOTTOM", 8+EUF_CurrentOptions["PARTYCASTPOSITIONX"], -34+EUF_CurrentOptions["PARTYCASTPOSITIONY"]);
+            else
+                Place(_G["PartyFrame"..i.."SpellBar"], "BOTTOM", "PartyMemberFrame"..i, "BOTTOM", 8+EUF_CurrentOptions["PARTYCASTPOSITIONX"], -8+EUF_CurrentOptions["PARTYCASTPOSITIONY"]);
+            end;
         end;
     end;
 end

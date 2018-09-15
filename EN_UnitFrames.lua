@@ -1,5 +1,5 @@
 ﻿--[[
-Enigma Unit Frames 8.0.4 Main Script
+Enigma Unit Frames 8.0.6 Main Script
 
 Notice for developers:
 - How to release new version?
@@ -9,7 +9,7 @@ DO NOT update the 'COMPATIBLEVERSION in EUF_CurrentOptions' unless
 you revise the structure of EUF_CurrentOptions, and want users to reset to default setting again.
 ]]
 
-EUF_Version = "8.0.4"
+EUF_Version = "8.0.6"
 EUF_AddonId = "EUF";
 EUF_AddonName = "Enigma Unit Frames";
 EUF_SysAddonName = "EN_UnitFrames";
@@ -43,7 +43,7 @@ EN_MAX_PLAYER_LEVEL = {
 EUF_CurrentOptions = {};
 
 local EUF_DefaultOptions= {
-        ["VERSION"] = "8.0.4",
+        ["VERSION"] = "8.0.6",
         ["COMPATIBLEVERSION"] = "7.0.4",
         ["PLAYERHP"] = 1,
         ["PLAYERMP"] = 1,
@@ -513,7 +513,7 @@ function EUF_Options_Update(oOptionId, oValue)
     elseif (optionId == "PARTYTARGET") then
         PartyTarget_UpdateAll();
     elseif (optionId == "PARTYBUFF") then
-        PartyBuff_UpdateAll();
+        PartyBuff_Toggle();
     elseif (optionId == "FOCUSHP") or (optionId == "FOCUSHPPERCENT") or (optionId == "FOCUSPERCENTINSIDE") then
         TgFocusFrameHealthBarText_UpdateTextString(TgFocusFrameHealthBar);
     elseif optionId == "PARTYBUFFPOSITIONX" or optionId == "PARTYBUFFPOSITIONY" then

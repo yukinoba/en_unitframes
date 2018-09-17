@@ -176,32 +176,41 @@ end
 
 -- Pet Buffs/Debuffs --
 for i = 1, 10 do
-    eufpetbuff = CreateFrame("Button", "PetFrameBuff"..i, PetFrame, "PartyBuffFrameTemplate");
+    local str = "EUF_PetFrame";
+    eufpetbuff = CreateFrame("Button", str.."Buff"..i, PetFrame, "PartyBuffFrameTemplate");
+    eufpetbuff:RegisterEvent("UNIT_AURA");
     eufpetbuff:SetID(i);
     eufpetbuff:SetWidth(15);
     eufpetbuff:SetHeight(15);
     eufpetbuff:SetScript("OnEnter",function(self)
-        GameTooltip:SetOwner(self, "ANCHOR_RIGHT");
+        GameTooltip:SetOwner(self, "ANCHOR_BOTTOMRIGHT", 15, -25);
         GameTooltip:SetUnitBuff("pet", i);
     end);
-
-    eufpetbuff:SetScript("OnUpdate",function()
-        --_, _, icon = UnitBuff("pet", i);
+    eufpetbuff:SetScript("OnUpdate",function(self)
         local name, icon, count, debuffType, duration, expirationTime = UnitBuff("pet", i);
-        getglobal("PetFrameBuff"..i.."Icon"):SetTexture(icon);
+        getglobal(str.."Buff"..i.."Icon"):SetTexture(icon);
+        if ( GameTooltip:IsOwned(self) ) then
+            GameTooltip:SetUnitBuff("pet", i);
+        end;
     end);
-
+    eufpetbuff:SetScript("OnEvent",function(self, event, ...)
+        local name, icon, count, debuffType, duration, expirationTime = UnitBuff("pet", i);
+        getglobal(str.."Buff"..i.."Icon"):SetTexture(icon);
+        if ( GameTooltip:IsOwned(self) ) then
+            GameTooltip:SetUnitBuff("pet", i);
+        end;
+    end);
     eufpetbuff:SetScript("OnLeave",function()
         GameTooltip:Hide();
     end);
-
     if i == 1 then
         Place(eufpetbuff, "TOPLEFT", PetFrame, "TOPLEFT", 48, -42);
     else
-        Place(eufpetbuff, "LEFT", "PetFrameBuff"..i-1, "RIGHT", 2, 0);
+        Place(eufpetbuff, "LEFT", str.."Buff"..i-1, "RIGHT", 2, 0);
     end;
+    eufpetbuff:Show();
 
-    eufpetdebuff = CreateFrame("Button", "PetFrameDebuff"..i, PetFrame, "PartyPetDebuffFrameTemplate");
+    --eufpetdebuff = CreateFrame("Button", str.."Debuff"..i, PetFrame, "PartyPetDebuffFrameTemplate");
 end;
 
 function PartyMemberBuffTooltip_Update(isPet)

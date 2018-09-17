@@ -800,6 +800,8 @@ function PowerFrame_Position(class,canShow)
     if canShow == 1 then
         if ( class == "SHAMAN" ) then
             Place(PlayerFrameAlternateManaBar, "TOP", "PlayerFrame", "BOTTOM", 54, 10);
+        elseif ( class == "ROGUE" ) then
+            Place(ComboPointPlayerFrame, "TOP", "PlayerFrame", "BOTTOM", 54, 20);
         elseif ( class == "DRUID" ) then
             Place(PlayerFrameAlternateManaBar, "TOP", "PlayerFrame", "BOTTOM", 54, 10);
             Place(PlayerFrame.classPowerBar, "TOP", "PlayerFrame", "BOTTOM", 54, 40);
@@ -813,8 +815,14 @@ function PowerFrame_Position(class,canShow)
         elseif ( class == "MONK" ) then
             Place(MonkStaggerBar, "TOP", "PlayerFrame", "BOTTOM", 54, 10);
             Place(PlayerFrame.classPowerBar, "TOP", "PlayerFrame", "BOTTOM", 54, 40);
+        elseif ( class == "HUNTER" ) then
+            if ( UnitExists("pet") ) then
+                PetFrame:ClearAllPoints();
+                Place(PetFrame, "TOP", "PlayerFrame", "BOTTOM", 20, 20);
+            end;
+            Place(PlayerFrame.classPowerBar, "TOP", "PlayerFrame", "BOTTOM", 54, 20);
         elseif ( PlayerFrame.classPowerBar ) then
-            Place(PlayerFrame.classPowerBar, "TOP", "PlayerFrame", "BOTTOM", 54, 40);
+            Place(PlayerFrame.classPowerBar, "TOP", "PlayerFrame", "BOTTOM", 54, 20);
         end;
         -- if ( class == "WARLOCK" ) then
             -- Place(WarlockPowerFrame, "TOP", "PlayerFrame", "BOTTOM", 54, 25);
@@ -825,12 +833,14 @@ function PowerFrame_Position(class,canShow)
         -- elseif ( class == "DEATHKNIGHT" ) then
             -- Place(RuneFrame, "TOP", "PlayerFrame", "BOTTOM", 54, 20);
         -- end;
-        if PetFrame and PetFrame:IsShown() then
-            Place(PetFrame, "TOP", "PlayerFrame", "BOTTOM", 20, 10);
-        end;
+        -- if PetFrame and PetFrame:IsShown() then
+            -- Place(PetFrame, "TOP", "PlayerFrame", "BOTTOM", 20, 30);
+        -- end;
     else
         if ( class == "SHAMAN" ) then
             Place(PlayerFrameAlternateManaBar, "TOP", "PlayerFrame", "BOTTOM", 54, 35);
+        elseif ( class == "ROGUE" ) then
+            Place(ComboPointPlayerFrame, "TOP", "PlayerFrame", "BOTTOM", 54, 35);
         elseif ( class == "DRUID" ) then
             Place(PlayerFrameAlternateManaBar, "TOP", "PlayerFrame", "BOTTOM", 54, 35);
             Place(PlayerFrame.classPowerBar, "TOP", "PlayerFrame", "BOTTOM", 54, 50);
@@ -844,8 +854,14 @@ function PowerFrame_Position(class,canShow)
         elseif ( class == "MONK" ) then
             Place(MonkStaggerBar, "TOP", "PlayerFrame", "BOTTOM", 54, 35);
             Place(PlayerFrame.classPowerBar, "TOP", "PlayerFrame", "BOTTOM", 54, 55);
+        elseif ( class == "HUNTER" ) then
+            if ( UnitExists("pet") ) then
+                PetFrame:ClearAllPoints();
+                Place(PetFrame, "TOP", "PlayerFrame", "BOTTOM", 20, 30);
+            end;
+            Place(PlayerFrame.classPowerBar, "TOP", "PlayerFrame", "BOTTOM", 54, 20);
         elseif ( PlayerFrame.classPowerBar ) then
-            Place(PlayerFrame.classPowerBar, "TOP", "PlayerFrame", "BOTTOM", 54, 50);
+            Place(PlayerFrame.classPowerBar, "TOP", "PlayerFrame", "BOTTOM", 54, 35);
         end;
         -- if ( class == "WARLOCK" ) then
             -- Place(WarlockPowerFrame, "TOP", "PlayerFrame", "BOTTOM", 54, 35);
@@ -856,9 +872,9 @@ function PowerFrame_Position(class,canShow)
         -- elseif ( class == "DEATHKNIGHT" ) then
             -- Place(RuneFrame, "TOP", "PlayerFrame", "BOTTOM", 54, 30);
         -- end;
-        if PetFrame and PetFrame:IsShown() then
-            Place(PetFrame, "TOP", "PlayerFrame", "BOTTOM", 20, 20);
-        end;
+        -- if PetFrame and PetFrame:IsShown() then
+            -- Place(PetFrame, "TOP", "PlayerFrame", "BOTTOM", 20, 30);
+        -- end;
     end;
 end
 
